@@ -1,0 +1,172 @@
+HTML
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Registration Form</h2>
+    <form id="registrationForm" onsubmit="return validateForm()">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+      <br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      <br>
+      <label for="address">Address:</label>
+      <textarea id="address" required></textarea>
+      <br>
+      <label for="phone">Phone Number:</label>
+      <input type="text" id="phone" required>
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+      <br>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" required>
+      <br>
+      <input type="checkbox" id="terms" required>
+      <label for="terms">I agree to the terms and conditions</label>
+      <br>
+      <input type="submit" value="Register">
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+CSS
+
+.container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+JAVASCRIPT
+
+function validateForm() {
+  // Get the form input values
+  var username = document.getElementById("username").value;
+  var email = document.getElementById("email").value;
+  var address = document.getElementById("address").value;
+  var phone = document.getElementById("phone").value;
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirmPassword").value;
+  var terms = document.getElementById("terms").checked;
+
+  // Check if the username field is empty
+  if (username.trim() === "") {
+    alert("Username field is required");
+    return false; // Prevent form submission
+  }
+
+  // Check if the email field is empty or not a valid email format
+  if (email.trim() === "") {
+    alert("Email field is required");
+    return false; // Prevent form submission
+  } else {
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.match(emailRegex)) {
+      alert("Invalid email format");
+      return false; // Prevent form submission
+    }
+  }
+
+  // Check if the address field is empty
+  if (address.trim() === "") {
+    alert("Address field is required");
+    return false; // Prevent form submission
+  }
+
+  // Check if the phone field is empty or not a valid phone number format
+  if (phone.trim() === "") {
+    alert("Phone Number field is required");
+    return false; // Prevent form submission
+  } else {
+    var phoneRegex = /^\d{10}$/; // assuming a 10-digit phone number format
+    if (!phone.match(phoneRegex)) {
+      alert("Invalid phone number format");
+      return false; // Prevent form submission
+    }
+  }
+
+  // Check if the password field is empty
+  if (password.trim() === "") {
+    alert("Password field is required");
+    return false; // Prevent form submission
+  }
+
+  // Check if the confirm password field is empty
+  if (confirmPassword.trim() === "") {
+    alert("Confirm Password field is required");
+    return false; // Prevent form submission
+  }
+
+  // Check if the password and confirm password match
+  if (password !== confirmPassword) {
+    alert("Passwords do not match");
+    return false; // Prevent form submission
+  }
+
+  // Check if the terms checkbox is checked
+  if (!terms) {
+    alert("Please agree to the terms and conditions");
+    return false; // Prevent form submission
+  }
+
+  // If all validations pass, you can perform additional actions or submit the form
+  // For example:
+  // document.getElementById("registrationForm").submit();
+  
+  return true; // Allow form submission
+}
