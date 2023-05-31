@@ -1,0 +1,20 @@
+window.onload = function() {
+    var imageContainer = document.getElementById('image-container');
+    var images = imageContainer.getElementsByTagName('img');
+    
+    var scrollIndex = 0;
+    var scrollSpeed = 2;
+    
+    function scrollImages() {
+        scrollIndex += scrollSpeed;
+        imageContainer.scrollLeft = scrollIndex;
+        
+        if (scrollIndex >= images[0].width + 20) {
+            scrollIndex = 0;
+        }
+        
+        requestAnimationFrame(scrollImages);
+    }
+    
+    scrollImages();
+};
